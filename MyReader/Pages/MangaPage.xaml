@@ -1,0 +1,46 @@
+﻿<Page x:Class="MyReader.Pages.MangaPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="clr-namespace:MyReader.Pages.ViewModels"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:local="clr-namespace:MyReader.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MangaPage">
+    <Page.DataContext>
+        <vm:MangaPageViewModel />
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Image Name="imgThumbnail" Source="{Binding SelectedManga.Thumbnail}" Grid.Column="0" Height="150" />
+            <StackPanel Grid.Column="1">
+                <Label Name="lblTitle" Content="{Binding SelectedManga.Title}" />
+                <Label Name="lblAuthor" Content="{Binding SelectedManga.Author}" />
+                <Label Name="lblSource" Content="{Binding SelectedManga.Source}" />
+            </StackPanel>
+        </Grid>
+        <ListView Name="lbChapters" ItemsSource="{Binding MangaChapters}" Grid.Row="1" SelectedItem="{Binding SelectedChapter}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" />
+                </GridView>
+            </ListView.View>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding SwitchToChapterReaderCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+    </Grid>
+</Page>

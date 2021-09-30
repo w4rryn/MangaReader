@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<RunPostBuildEvent>Always</RunPostBuildEvent>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.36" />
+		<PackageReference Include="MahApps.Metro" Version="2.4.7" />
+		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SourcePluginSDK\SourcePluginSDK.csproj" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy &quot;C:\Users\k.roth\source\repos\MyReader\MangakakalotPlugin\bin\Debug\netcoreapp3.1\MangakakalotPlugin.dll&quot; &quot;$(OutDir)plugins&quot; /Y" />
+	</Target>
+</Project>
