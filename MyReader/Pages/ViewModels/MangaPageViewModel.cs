@@ -64,15 +64,20 @@ namespace MyReader.Pages.ViewModels
                 {
                     switchToChapterReader = new Command((o) =>
                     {
-                        var p = new MangaReaderPage
-                        {
-                            DataContext = new MangaReaderPageViewModel(new ChapterModel(SelectedChapter, SelectedManga.Manga))
-                        };
-                        App.SwitchContent(p);
+                        ShowMangaReaderPage();
                     }, () => SelectedChapter != null);
                 }
                 return switchToChapterReader;
             }
+        }
+
+        private void ShowMangaReaderPage()
+        {
+            var p = new MangaReaderPage
+            {
+                DataContext = new MangaReaderPageViewModel(new ChapterModel(SelectedChapter, SelectedManga.Manga))
+            };
+            App.SwitchContent(p);
         }
     }
 }
