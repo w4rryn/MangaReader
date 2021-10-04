@@ -1,9 +1,11 @@
 ﻿using SourcePluginSDK;
 using SourcePluginSDK.Domain;
+using System;
 using System.Drawing;
 
 namespace MangakakalotPlugin.Domain
 {
+    [Serializable]
     public class MgkkManga : Manga
     {
         private static readonly ISourceFactory source = new MangakakalotFactory();

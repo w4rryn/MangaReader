@@ -12,7 +12,11 @@
         <vm:MangaReaderPageViewModel />
     </Page.DataContext>
     <Grid>
-        <ListView ItemsSource="{Binding ChapterPanels}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding ChapterPanels}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
@@ -25,5 +29,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Grid Grid.Row="1">
+            <Button Content="Set Bookmark" Command="{Binding SetBookmarkCommand}" />
+        </Grid>
     </Grid>
 </Page>

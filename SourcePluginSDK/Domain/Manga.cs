@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SourcePluginSDK.Domain
 {
+    [Serializable]
     public abstract class Manga
     {
         public Manga(ISourceFactory source)

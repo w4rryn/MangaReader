@@ -1,8 +1,11 @@
 ﻿using MyReader.Common;
+using MyReader.Core;
 using SourcePluginSDK.Domain;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MyReader.Pages.ViewModels
 {
@@ -11,6 +14,7 @@ namespace MyReader.Pages.ViewModels
         private readonly BackgroundWorker panelLoaderWorker;
         private ObservableCollection<PanelModel> chapterPanels;
         private ChapterModel currentChapter;
+        private readonly Bookmarker bookmarker;
 
         public MangaReaderPageViewModel()
         {
@@ -24,6 +28,7 @@ namespace MyReader.Pages.ViewModels
         public MangaReaderPageViewModel(ChapterModel chapter) : this()
         {
             CurrentChapter = chapter;
+            bookmarker = new Bookmarker();
         }
 
         public ObservableCollection<PanelModel> ChapterPanels
@@ -34,6 +39,25 @@ namespace MyReader.Pages.ViewModels
                 chapterPanels = value;
                 OnPropertyChanged();
             }
+        }
+
+        private ICommand setBookmarkCommand;
+
+        public ICommand SetBookmarkCommand
+        {
+            get
+            {
+                if (setBookmarkCommand == null)
+                {
+                    setBookmarkCommand = new Command((o) => CreateBookmarkForCurrentChapter(), () => true);
+                }
+                return setBookmarkCommand;
+            }
+        }
+
+        private void CreateBookmarkForCurrentChapter()
+        {
+            bookmarker.CreateBookmark(currentChapter.Manga, currentChapter.Chapter);
         }
 
         public ChapterModel CurrentChapter

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MangakakalotPlugin.Domain
 {
+    [Serializable]
     public class MgkkChapter : Chapter
     {
         public MgkkChapter(string name, string url) : base(name)
